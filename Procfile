@@ -1,1 +1,1 @@
-web: gunicorn ml-training.wsgi --log-file -
+web: gunicorn ml_training.wsgi --log-file -
