@@ -16,6 +16,7 @@ from ml_training.config import Config
 
 config = Config()
 
+
 SECRET_KEY = config.get('SECRET_KEY', os.environ.get('SECRET_KEY', 'secret'))
 DEBUG = bool(config.get('DEBUG', os.environ.get('DEBUG', False)))
 DATABASE_URL = config.get('DATABASE_URL', os.environ.get('DATABASE_URL', ''))
@@ -49,7 +50,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'ml-training.urls'
+ROOT_URLCONF = 'ml_training.urls'
 
 TEMPLATES = [
     {
@@ -77,7 +78,7 @@ WSGI_APPLICATION = 'ml_training.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default=DATABASE_URL)
+    'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=500)
 }
 
 # Password validation
@@ -107,11 +108,6 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-
-# Update database configuration with $DATABASE_URL.
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
-
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -132,4 +128,3 @@ STATICFILES_DIRS = (
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-

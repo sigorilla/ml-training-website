@@ -10,12 +10,12 @@ validate: lint test
 
 .PHONY: lint
 lint:
-	echo "Linting via PEP8"
+	@echo "Linting via PEP8"
 	pep8
 
 .PHONY: test
 test:
-	echo "Testing"
+	@echo "Testing"
 	python manage.py test
 
 .PHONY: pip
@@ -24,4 +24,4 @@ pip:
 
 .PHONY: dev
 dev:
-	python manage.py runserver 5000
+	python manage.py runserver 3000

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OS=$( uname -s )v
+OS=$( uname -s )
 if [[ -z ${OS} ]];
 then
     echo "Sorry, but we cannot get your OS."
@@ -11,14 +11,14 @@ else
 fi
 
 # Add git-hook
-$( ln -fs ../../tools/pre-commit.sh .git/hooks/pre-commit )
+$( ln -fs ../tools/pre-commit.sh .git/hooks/pre-commit )
 $( chmod +x .git/hooks/pre-commit )
 
 RESULT=$( virtualenv --version )
 if [ ${RESULT} ]
 then
     echo "Virtualenv has $RESULT version"
-    virtualenv venv;
+    virtualenv venv -p python2.7
 else
     echo "Installing virtualenv."
     pip install virtualenv
