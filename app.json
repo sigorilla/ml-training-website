@@ -1,0 +1,8 @@
+{
+  "name": "ML Training",
+  "description": "ML Training.",
+  "image": "heroku/python",
+  "repository": "https://github.com/sigorilla/ml-training-website",
+  "keywords": ["python", "django", "ml" ],
+  "addons": [ "heroku-postgresql" ]
+}
