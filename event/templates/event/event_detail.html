@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <article class="event detail" id="event_{{ event.id }}">
+        <div>{{ event.content|safe }}</div>
+        <p class="event-date">{{ event.pub_date|date:"F d, Y H:i" }}</p>
+    </article>
+{% endblock %}

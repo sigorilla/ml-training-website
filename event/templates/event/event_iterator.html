@@ -1,0 +1,10 @@
+<ul class="list-unstyled events-list">
+{% for event in events %}
+    {% if event.active or user.is_staff %}
+        <li class="events-item">
+            <span class="pull-right events-item-date">{{ event.pub_date|date:"F d, Y" }}</span>
+            <a href="{% url 'event:detail' event.id %}" class="events-item-title">{{ event.title }}</a>
+        </li>
+    {% endif %}
+{% endfor %}
+</ul>
