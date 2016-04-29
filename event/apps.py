@@ -6,4 +6,4 @@ from django.apps import AppConfig
 
 class EventsConfig(AppConfig):
     name = 'event'
-    verbose_name = 'событие'
+    verbose_name = 'Событие'

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% include "event/event_iterator.html" with events=events %}
+    <div class="row">
+        {% include "event/event_iterator.html" with events=events %}
+    </div>
 {% endblock %}

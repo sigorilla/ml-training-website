@@ -8,6 +8,32 @@ from django.utils import timezone
 import datetime
 
 
+class Link(models.Model):
+
+    class Meta:
+        verbose_name = 'ссылка'
+        verbose_name_plural = 'ссылки'
+        ordering = ['title']
+
+    def __str__(self):
+        return self.title
+
+    def __unicode__(self):
+        return self.title
+
+    TARGET_CHOICES = (
+        ('EM', ''),
+        ('BL', '_blank'),
+        ('SF', '_self'),
+        ('PR', '_parent'),
+        ('TP', '_top'),
+    )
+
+    title = models.CharField(max_length=200, verbose_name='текст')
+    href = models.CharField(max_length=200, verbose_name='ссылка')
+    target = models.CharField(max_length=2, choices=TARGET_CHOICES, default='EM', verbose_name='как открыть?')
+
+
 class Event(models.Model):
 
     class Meta:
@@ -28,6 +54,8 @@ class Event(models.Model):
     content = models.TextField(verbose_name='содержимое')
     pub_date = models.DateTimeField(auto_now_add=True, verbose_name='дата публикации')
     active = models.BooleanField(default=False, verbose_name='активно')
+    image = models.TextField(verbose_name='изображение', blank=True)
+    links = models.ManyToManyField(Link, verbose_name='ссылки', blank=True)
 
     def was_published_recently(self):
         now = timezone.now()
