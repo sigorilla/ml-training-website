@@ -3,6 +3,17 @@
 {% block content %}
     <article class="event detail" id="event_{{ event.id }}">
         <div>{{ event.content|safe }}</div>
-        <p class="event-date">{{ event.pub_date|date:"F d, Y H:i" }}</p>
+
+        {% if event.links.all %}
+            <div>Ссылки:</div>
+            <ul>
+            {% for link in event.links.all %}
+                <li>
+                    <a href="{{ link.href }}" target="{{ link.target }}">{{ link.title }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="event-date">Опубликовано: {{ event.pub_date|date:"d F, Y H:i" }}</div>
     </article>
 {% endblock %}

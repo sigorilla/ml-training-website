@@ -1,12 +1,20 @@
 {% if events %}
-    <ul class="list-unstyled events-list">
+    <table class="table table-condensed table-hover table-striped event-list">
+        <col width="60%">
+        <col align="right">
     {% for event in events %}
         {% if event.active %}
-            <li class="events-item">
-                <span class="pull-right events-item-date">{{ event.pub_date|date:"F d, Y" }}</span>
-                <a href="{% url 'event:detail' event.id %}" class="events-item-title">{{ event.title }}</a>
-            </li>
+            <tr class="event-item">
+                <td>
+                    <a href="{% url 'event:detail' event.id %}" class="event-title">{{ event.title }}</a>
+                </td>
+                <td>
+                    <span class="event-date">{{ event.pub_date|date:"d F, Y" }}</span>
+                </td>
+            </tr>
         {% endif %}
     {% endfor %}
-    </ul>
+    </table>
+{% else %}
+    <h3>Ничего не найдено.</h3>
 {% endif %}

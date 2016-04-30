@@ -11,7 +11,7 @@ validate: lint test
 .PHONY: lint
 lint:
 	@echo "Linting via PEP8"
-	pep8
+	pep8 --exclude=migrations,venv,.git
 
 .PHONY: test
 test:

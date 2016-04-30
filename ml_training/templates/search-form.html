@@ -1,8 +1,30 @@
 <form class="input-group search-form" method="get" action="{% url 'event:search' %}">
-    <input type="text" name="q" class="form-control search-input" placeholder="Поиск" required>
+    <input
+        type="text"
+        name="q"
+        class="form-control search-input"
+        placeholder="Поиск"
+        required
+        autocomplete="off"
+    >
     <div class="input-group-btn">
+{# TODO: добавить фильтр по дате. #}
+        <div class="btn-group hidden">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li><a>Фильтр</a></li>
+            </ul>
+        </div>
+
         <button type="submit" class="btn btn-default">
             <i class="glyphicon glyphicon-search"></i>
         </button>
     </div>
 </form>
+<div>
+    <div class="search-preview popover bottom">
+        <div class="arrow"></div>
+        <h3 class="popover-title">Результаты поиска</h3>
+        <div class="popover-content"></div>
+    </div>
+</div>

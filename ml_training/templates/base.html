@@ -26,24 +26,31 @@
 </head>
 <body>
     <div class="container">
-        <div class="row page-header">
-            <div class="col-xs-6">
-                <a href="{% url 'event:index' %}"><h1>Тренировки ML</h1></a>
-                <p class="lead">Тренировки и разбор соревнований по анализу данных.</p>
-                <p>
-                    <a href="https://www.facebook.com/groups/1413405125598651/1726705587601935/" target="_blank">Facebook</a>,
-                    <a href="https://www.youtube.com/channel/UCeq6ZIlvC9SVsfhfKnSvM9w" target="_blank">YouTube</a>
-                </p>
+        <div class="page-header">
+            <div class="row">
+                <div class="col-xs-6">
+                    <a href="{% url 'event:index' %}"><h1>Тренировки ML</h1></a>
+                    <p class="lead">Тренировки и разбор соревнований по анализу данных.</p>
+                    <p>
+                        <a href="https://www.facebook.com/groups/1413405125598651/1726705587601935/" target="_blank">Facebook</a>,
+                        <a href="https://www.youtube.com/channel/UCeq6ZIlvC9SVsfhfKnSvM9w" target="_blank">YouTube</a>
+                    </p>
+                </div>
+                <div class="col-xs-6">{% include "search-form.html" %}</div>
             </div>
-            <div class="col-xs-6">{% include "search-form.html" %}</div>
         </div>
 
-        {% block content %}
+        {% block content %}{% endblock %}
 
-        {% endblock %}
+        <hr>
+
+        <footer>
+            <div>ML Training &mdash; {% now 'Y' %}</div>
+        </footer>
     </div>
 
     <script src="//code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/search.js' %}"></script>
 </body>
 </html>

@@ -12,11 +12,11 @@
             <div id="event__{{ event.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
                     {% if event.image %}
-                        <img src="{{ event.image }}" alt="{{ event.title }}" class="pull-left" style="max-height: 100px;">
+                        <img src="{{ event.image }}" alt="{{ event.title }}" class="pull-right" style="max-height: 100px;">
                     {% endif %}
-                    <div>{{ event.content }}</div>
+                    <div>{{ event.content|safe }}</div>
                     {% if event.links.all %}
-                        <p>Ссылки:</p>
+                        <div>Ссылки:</div>
                         <ul>
                         {% for link in event.links.all %}
                             <li>
@@ -26,7 +26,7 @@
                         </ul>
                     {% endif %}
                     <hr>
-                    {{ event.pub_date|date:"d F, Y" }} | <a href="{% url 'event:detail' event.id %}">Подробнее</a>
+                    <div>Опубликовано: {{ event.pub_date|date:"d F, Y" }} | <a href="{% url 'event:detail' event.id %}">Подробнее</a></div>
                 </div>
             </div>
         </div>
