@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'event',
+    'competition',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -109,8 +109,8 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-DATE_FORMAT = 'd E Y'
-DATETIME_FORMAT = 'd E Y H:i'
+DATE_FORMAT = 'j E Y'
+DATETIME_FORMAT = 'j E Y H:i'
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

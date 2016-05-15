@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="media competition-detail" data-id="{{ competition.id }}">
+        <div class="media-left">
+            <a href="{{ competition.link }}" target="_blank">
+                <img src="{{ competition.image }}" alt="Logo" class="media-object" style="width: 150px;">
+            </a>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading competition-title">{{ competition.title|title }}</h4>
+            <div><a href="{{ competition.link }}" target="_blank">Сайт соревнования</a></div>
+            <div>Начало: {{ competition.start_date|date }}</div>
+            <div>Крайний срок регистрации: {{ competition.entry_deadline|date }} (осталось {{ competition.entry_deadline|timeuntil }})</div>
+            <div>Крайний срок подачи: {{ competition.submission_deadline|date }} (осталось {{ competition.submission_deadline|timeuntil }})</div>
+            <div>Окончание: {{ competition.finish_date|date }} (осталось {{ competition.finish_date|timeuntil }})</div>
+            <hr>
+            <div class="more-information">
+                {{ competition.content|safe }}
+                {% if competition.links.all %}
+                    <div>Материалы:</div>
+                    <ul>
+                    {% for link in competition.links.all %}
+                        <li>
+                            <a href="{{ link.href }}" target="{{ link.target }}">{{ link.title }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

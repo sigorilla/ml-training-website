@@ -1,0 +1,53 @@
+<div class="competition-list">
+{% for competition in competitions %}
+    <div class="media competition-item" data-id="{{ competition.id }}">
+        <div class="media-left">
+            <a href="{{ competition.link }}">
+                <img src="{{ competition.image }}" alt="Logo" class="media-object" style="width: 150px;">
+            </a>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading competition-title">
+                <a href="{% url 'competition:detail' competition.id %}">{{ competition.title|title }}</a>
+            </h4>
+            <div><a href="{{ competition.link }}" target="_blank">Сайт соревнования</a></div>
+            <div>Начало: {{ competition.start_date|date }}</div>
+            <div>Крайний срок регистрации: {{ competition.entry_deadline|date }} (осталось {{ competition.entry_deadline|timeuntil }})</div>
+            <div>Крайний срок подачи: {{ competition.submission_deadline|date }} (осталось {{ competition.submission_deadline|timeuntil }})</div>
+            <div>Окончание: {{ competition.finish_date|date }} (осталось {{ competition.finish_date|timeuntil }})</div>
+            <div><a href="#" class="show-more">Подробнее</a></div>
+            <div class="more-information hidden">
+                {{ competition.content|safe }}
+                {% if competition.links.all %}
+                    <div>Материалы:</div>
+                    <ul>
+                    {% for link in competition.links.all %}
+                        <li>
+                            <a href="{{ link.href }}" target="{{ link.target }}">{{ link.title }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% empty %}
+    <div class="jumbotron">
+        <h1>Ничего не найдено.</h1>
+    </div>
+{% endfor %}
+</div>
+
+{% if is_paginated %}
+<div class="text-center">
+    <ul class="pagination">
+        {% for num in paginator.page_range %}
+            {% ifequal num page_obj.number %}
+                <li class="active"><a>{{ num }}</a></li>
+            {% else %}
+                <li><a href="?page={{ num }}">{{ num }}</a></li>
+            {% endifequal %}
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}

@@ -34,12 +34,12 @@ class Link(models.Model):
     target = models.CharField(max_length=2, choices=TARGET_CHOICES, default='EM', verbose_name='как открыть?')
 
 
-class Event(models.Model):
+class Competition(models.Model):
 
     class Meta:
-        verbose_name = 'событие'
-        verbose_name_plural = 'события'
-        ordering = ['-pub_date']
+        verbose_name = 'соревнование'
+        verbose_name_plural = 'соревнования'
+        ordering = ['-finish_date', '-pub_date']
 
     def __str__(self):
         return self.title
@@ -48,14 +48,19 @@ class Event(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('event:detail', kwargs={'pk': self.pk})
+        return reverse('competition:detail', kwargs={'pk': self.pk})
 
     title = models.CharField(max_length=200, verbose_name='заголовок')
     content = models.TextField(verbose_name='содержимое')
     pub_date = models.DateTimeField(auto_now_add=True, verbose_name='дата публикации')
+    start_date = models.DateTimeField(verbose_name='дата начала', default=timezone.now, blank=False)
+    submission_deadline = models.DateTimeField(default=timezone.now)
+    entry_deadline = models.DateTimeField(default=timezone.now)
+    finish_date = models.DateTimeField(verbose_name='дата окончания', default=timezone.now, blank=False)
     active = models.BooleanField(default=False, verbose_name='активно')
-    image = models.TextField(verbose_name='изображение', blank=True)
-    links = models.ManyToManyField(Link, verbose_name='ссылки', blank=True)
+    image = models.TextField(verbose_name='изображение', default='/static/img/competition-logo.svg')
+    link = models.URLField(verbose_name='ссылка', default='#', blank=False)
+    links = models.ManyToManyField(Link, verbose_name='материалы', blank=True)
 
     def was_published_recently(self):
         now = timezone.now()

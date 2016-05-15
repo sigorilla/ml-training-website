@@ -1,18 +1,17 @@
-<form class="input-group search-form" method="get" action="{% url 'event:search' %}">
+<form class="input-group search-form" method="get" action="{% url 'competition:search' %}">
     <input
         type="text"
         name="q"
         class="form-control search-input"
         placeholder="Поиск"
-        required
         autocomplete="off"
     >
     <div class="input-group-btn">
 {# TODO: добавить фильтр по дате. #}
-        <div class="btn-group hidden">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i></button>
             <ul class="dropdown-menu dropdown-menu-right">
-                <li><a>Фильтр</a></li>
+                <li><a href="#" class="for-actual" data-type="checkbox"><input type="checkbox" name="actual" class="hidden" /> Показать активные?</a></li>
             </ul>
         </div>
 

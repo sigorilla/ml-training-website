@@ -2,6 +2,28 @@ div {
     position: relative;
 }
 
+/**********
+ * Search *
+ **********/
+
 .search-preview {
     min-width: 100%;
+}
+
+.search-form a[data-type = checkbox].checked {
+    background-color: #5b80b2;
+}
+
+/************************
+ * List of Competitions *
+ ************************/
+
+.competition-item,
+.competition-detail {
+    margin: 0;
+    padding: 5px;
+}
+
+.competition-item:hover {
+    background-color: #edecd6;
 }

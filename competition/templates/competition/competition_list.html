@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% include "competition/competition_iterator.html" with competitions=competitions %}
+{% endblock %}

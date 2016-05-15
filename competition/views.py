@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
+from django.utils import timezone
 from django.views.decorators.cache import never_cache
 from django.views import generic
 
 import re
 
-from models import Event
+from models import Competition
 
 
 class SearchMixin(object):
@@ -45,53 +46,57 @@ class NeverCacheMixin(object):
         return never_cache(view)
 
 
-class EventListView(NeverCacheMixin, generic.ListView):
-    model = Event
-    context_object_name = 'events'
+class CompetitionListView(NeverCacheMixin, generic.ListView):
+    model = Competition
+    context_object_name = 'competitions'
     paginate_by = 20
 
     def get_queryset(self):
-        queryset = super(EventListView, self).get_queryset()
+        queryset = super(CompetitionListView, self).get_queryset()
         return queryset.filter(active__exact=True)
 
 
-class EventDetailView(NeverCacheMixin, generic.DetailView):
-    model = Event
+class CompetitionDetailView(NeverCacheMixin, generic.DetailView):
+    model = Competition
 
     def get(self, request, *args, **kwargs):
-        content = super(EventDetailView, self).get(request, *args, **kwargs)
+        content = super(CompetitionDetailView, self).get(request, *args, **kwargs)
         if not (request.user.is_staff or self.object.active):
             raise PermissionDenied
         return content
 
     def get_context_data(self, **kwargs):
-        context = super(EventDetailView, self).get_context_data(**kwargs)
+        context = super(CompetitionDetailView, self).get_context_data(**kwargs)
         if self.request.user.is_staff or self.object.active:
             context['title'] = self.get_object().title
         return context
 
 
-class SearchEventListView(SearchMixin, NeverCacheMixin, generic.ListView):
-    model = Event
-    template_name = 'event/search_event.html'
-    context_object_name = 'events'
+class SearchCompetitionListView(SearchMixin, NeverCacheMixin, generic.ListView):
+    model = Competition
+    template_name = 'competition/search_competition.html'
+    context_object_name = 'competitions'
 
     def get_queryset(self):
+        queryset = Competition.objects.all()
         if ('q' in self.request.GET) and self.request.GET['q'].strip():
             query_string = self.request.GET['q'].strip()
             entry_query = self.get_query(query_string, ['title', 'content'])
-            return Event.objects.filter(entry_query).order_by('-pub_date')
-        else:
-            return Event.objects.all()
+            queryset = queryset.filter(entry_query)
+
+        if 'actual' in self.request.GET:
+            queryset = queryset.filter(finish_date__gte=timezone.now())
+
+        return queryset
 
     def render_to_response(self, context, **response_kwargs):
         if self.request.is_ajax():
-            self.template_name = 'event/search_event_ajax.html'
-        return super(SearchEventListView, self).render_to_response(
+            self.template_name = 'competition/search_competition_ajax.html'
+        return super(SearchCompetitionListView, self).render_to_response(
             context, **response_kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(SearchEventListView, self).get_context_data(**kwargs)
+        context = super(SearchCompetitionListView, self).get_context_data(**kwargs)
         if ('q' in self.request.GET) and self.request.GET['q'].strip():
             context['query'] = self.request.GET['q'].strip()
             context['title'] = self.request.GET['q'].strip()

@@ -1,0 +1,20 @@
+{% if competitions %}
+    <table class="table table-condensed table-hover table-striped competition-list">
+        <col width="60%">
+        <col align="right">
+    {% for competition in competitions %}
+        {% if competition.active %}
+            <tr class="competition-item">
+                <td>
+                    <a href="{% url 'competition:detail' competition.id %}" class="competition-title">{{ competition.title|title }}</a>
+                </td>
+                <td>
+                    <span class="competition-date">{{ competition.finish_date|date }}</span>
+                </td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    </table>
+{% else %}
+    <h3>Ничего не найдено.</h3>
+{% endif %}
