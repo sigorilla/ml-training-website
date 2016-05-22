@@ -1,23 +1,23 @@
-# -*- coding: utf-8 -*-
 from django.shortcuts import render
+from django.utils.translation import ugettext as _
 
 
 def handler403(request):
     return render(request, 'error.html', {
         'error': '403',
-        'title': 'Запрещено'
+        'title': _('Access Denied')
     })
 
 
 def handler404(request):
     return render(request, 'error.html', {
         'error': '404',
-        'title': 'Не найдено'
+        'title': _('Not Found')
     })
 
 
 def handler500(request):
     return render(request, 'error.html', {
         'error': '500',
-        'title': 'Ошибка сервера'
+        'title': _('Server Error')
     })

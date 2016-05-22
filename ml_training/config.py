@@ -1,4 +1,5 @@
 import json
+import os
 
 
 class Config(object):
@@ -20,4 +21,4 @@ class Config(object):
         :param default: Default value
         :return:
         """
-        return self._dictionary.get(key, default)
+        return self._dictionary.get(key, os.environ.get(key, default))

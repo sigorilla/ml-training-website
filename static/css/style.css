@@ -22,9 +22,25 @@ div {
 .competition-item,
 .competition-detail {
     margin: 0;
-    padding: 5px;
+    padding: 10px 5px;
+}
+
+.competition-item:not(:last-child) {
+    border-bottom: 1px solid #eee;
 }
 
 .competition-item:hover {
     background-color: #edecd6;
+}
+
+.competition-date:first-letter {
+    text-transform: capitalize;
+}
+
+/**********
+ * Footer *
+ **********/
+
+footer {
+    margin-bottom: 20px;
 }

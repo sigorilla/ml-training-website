@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Django settings for gettingstarted project, on Heroku. For more info, see:
 https://github.com/heroku/heroku-django-template
@@ -12,15 +11,17 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 import os
 import dj_database_url
+from django.utils.translation import ugettext_lazy as _
 from ml_training.config import Config
 
 
 config = Config()
+SECRET_KEY = config.get('SECRET_KEY', 'secret')
+DEBUG = bool(config.get('DEBUG', False))
+DATABASE_URL = config.get('DATABASE_URL', '')
 
-
-SECRET_KEY = config.get('SECRET_KEY', os.environ.get('SECRET_KEY', 'secret'))
-DEBUG = bool(config.get('DEBUG', os.environ.get('DEBUG', False)))
-DATABASE_URL = config.get('DATABASE_URL', os.environ.get('DATABASE_URL', ''))
+TITLE = config.get('TITLE', 'ML')
+DESCRIPTION = config.get('DESCRIPTION', 'Training on ML')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -51,6 +52,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 APPEND_SLASH = True
@@ -109,7 +111,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'ru-RU'
+LANGUAGE_CODE = 'en'
+LANGUAGES = [
+    ('en', _('English')),
+    ('ru', _('Russian')),
+]
+LOCALE_PATHS = [
+    os.path.join(PROJECT_ROOT, 'locale'),
+]
+
 TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 USE_L10N = True
@@ -139,7 +149,3 @@ STATICFILES_DIRS = (
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
-# Site const
-TITLE = u'Тренировки ML'
-DESCRIPTION = u'Тренировки по Машинному обучению, анализ данных, разбор решений соревнований на Kaggle.'

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
     <div class="media competition-detail" data-id="{{ competition.id }}">
@@ -9,16 +10,16 @@
         </div>
         <div class="media-body">
             <h4 class="media-heading competition-title">{{ competition.title|title }}</h4>
-            <div><a href="{{ competition.link }}" target="_blank">Сайт соревнования</a></div>
-            <div>Начало: {{ competition.start_date|date }}</div>
-            <div>Крайний срок регистрации: {{ competition.entry_deadline|date }} (осталось {{ competition.entry_deadline|timeuntil }})</div>
-            <div>Крайний срок подачи: {{ competition.submission_deadline|date }} (осталось {{ competition.submission_deadline|timeuntil }})</div>
-            <div>Окончание: {{ competition.finish_date|date }} (осталось {{ competition.finish_date|timeuntil }})</div>
+            <div><a href="{{ competition.link }}" target="_blank">{% trans "Competition site" %}</a></div>
+            <div class="competition-date">{% trans "start date" %}: {{ competition.start_date|date }}</div>
+            <div class="competition-date">{% trans "entry deadline" %}: {{ competition.entry_deadline|date }} ({% trans "remaining" %} {{ competition.entry_deadline|timeuntil }})</div>
+            <div class="competition-date">{% trans "submission deadline" %}: {{ competition.submission_deadline|date }} ({% trans "remaining" %} {{ competition.submission_deadline|timeuntil }})</div>
+            <div class="competition-date">{% trans "finish date" %}: {{ competition.finish_date|date }} ({% trans "remaining" %} {{ competition.finish_date|timeuntil }})</div>
             <hr>
             <div class="more-information">
                 {{ competition.content|safe }}
                 {% if competition.links.all %}
-                    <div>Материалы:</div>
+                    <div>{% trans "Materials" %}:</div>
                     <ul>
                     {% for link in competition.links.all %}
                         <li>

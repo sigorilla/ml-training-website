@@ -1,16 +1,17 @@
+{% load i18n %}
 <form class="input-group search-form" method="get" action="{% url 'competition:search' %}">
     <input
         type="text"
         name="q"
         class="form-control search-input"
-        placeholder="Поиск"
+        placeholder="{% trans "Search" %}"
         autocomplete="off"
     >
     <div class="input-group-btn">
         <div class="btn-group">
             <button type="button" class="btn btn-default dropdown-toggle search-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i></button>
             <ul class="dropdown-menu dropdown-menu-right">
-                <li><a href="#" class="for-actual" data-type="checkbox"><input type="checkbox" name="actual" class="hidden" /> Показать активные?</a></li>
+                <li><a href="#" class="for-actual" data-type="checkbox"><input type="checkbox" name="actual" class="hidden" />{% trans "Choose active" %}</a></li>
             </ul>
         </div>
 
@@ -21,6 +22,6 @@
 </form>
 <div class="search-preview popover bottom">
     <div class="arrow"></div>
-    <h3 class="popover-title">Результаты поиска</h3>
+    <h3 class="popover-title">{% trans "Results" %}</h3>
     <div class="popover-content"></div>
 </div>

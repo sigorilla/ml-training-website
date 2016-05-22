@@ -1,17 +1,16 @@
-# -*- coding: utf-8 -*-
-
 from django.contrib import admin
+from django.utils.translation import ugettext as _
 from models import Competition, Link
 
 
 class CompetitionAdmin(admin.ModelAdmin):
     fieldsets = [
-        (u'Создать новое соревнование', {'fields': [
+        (_('Create new competition'), {'fields': [
             'title', 'content', 'link', 'active',
             'start_date', 'finish_date', 'entry_deadline', 'submission_deadline',
             'image'
         ]}),
-        (u'Больше информации', {'fields': ['links'], 'classes': ['collapse']}),
+        (_('More information'), {'fields': ['links'], 'classes': ['collapse']}),
     ]
     list_display = ('title', 'start_date', 'active', 'was_published_recently')
     list_filter = ['pub_date', 'upd_date', 'active']

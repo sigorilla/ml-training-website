@@ -1,3 +1,4 @@
+{% load i18n %}
 {% if competitions %}
     <table class="table table-condensed table-hover table-striped competition-list">
         <col width="60%">
@@ -8,13 +9,13 @@
                 <td>
                     <a href="{% url 'competition:detail' competition.id %}" class="competition-title">{{ competition.title|title }}</a>
                 </td>
-                <td>
-                    с <span class="competition-date">{{ competition.start_date|date }}</span> по <span class="competition-date">{{ competition.finish_date|date }}</span>
-                </td>
+                <td>{% blocktrans trimmed with start=competition.start_date|date finish=competition.finish_date|date %}
+                    from <span class="competition-date">{{ start }}</span> to <span class="competition-date">{{ finish }}</span>
+                {% endblocktrans %}</td>
             </tr>
         {% endif %}
     {% endfor %}
     </table>
 {% else %}
-    <h3>Ничего не найдено.</h3>
+    <h3>{% trans "Oops, no competitions found" %}</h3>
 {% endif %}

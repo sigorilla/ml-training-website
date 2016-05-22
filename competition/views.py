@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.utils import timezone
 from django.views.decorators.cache import never_cache
 from django.views import generic
+from django.utils.translation import ugettext as _
 
 import re
 
@@ -102,5 +102,5 @@ class SearchCompetitionListView(SearchMixin, NeverCacheMixin, generic.ListView):
             context['title'] = self.request.GET['q'].strip()
         else:
             context['query'] = ''
-            context['title'] = 'Поиск'
+            context['title'] = _('Search')
         return context

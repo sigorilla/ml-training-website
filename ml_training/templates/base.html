@@ -1,13 +1,15 @@
 {% load static %}
+{% load i18n %}
+{% get_current_language as lang %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ lang }}">
 <head>
     <meta charset="UTF-8">
-    <title>{{ title|default:TITLE|title }}{% if title %}{{ ' | ' }}{{ TITLE }}{% endif %}</title>
+    <title>{{ title|default:TITLE|title }}{% if title %}{{ ' | ' }}{% trans TITLE %}{% endif %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <meta name="description" content="{{ DESCRIPTION }}">
+    <meta name="description" content="{% trans DESCRIPTION %}">
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
@@ -24,14 +26,14 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-md-6">
-                    <a href="{% url 'competition:index' %}"><h1>{{ TITLE }}</h1></a>
+                    <a href="{% url 'competition:index' %}"><h1>{% trans TITLE %}</h1></a>
                 </div>
                 <div class="col-md-6">{% include "search-form.html" %}</div>
                 <div class="col-md-12">
-                    <p class="lead">{{ DESCRIPTION }}</p>
+                    <p class="lead">{% trans DESCRIPTION %}</p>
                     <p>
-                        <a href="https://www.facebook.com/groups/1413405125598651/1726705587601935/" target="_blank">Facebook</a>,
-                        <a href="https://www.youtube.com/channel/UCeq6ZIlvC9SVsfhfKnSvM9w" target="_blank">YouTube</a>
+                        <a href="https://www.facebook.com/groups/1413405125598651/1726705587601935/" target="_blank">{% trans "Facebook" %}</a>,
+                        <a href="https://www.youtube.com/channel/UCeq6ZIlvC9SVsfhfKnSvM9w" target="_blank">{% trans "YouTube" %}</a>
                     </p>
                 </div>
             </div>
@@ -41,8 +43,9 @@
 
         <hr>
 
-        <footer>
-            <div>{{ TITLE }} &mdash; {% now 'Y' %}</div>
+        <footer class="row">
+            <div class="col-sm-6">{% trans TITLE %} &mdash; {% now 'Y' %}</div>
+            <div class="col-sm-6">{% include "form-choose-lang.html" %}</div>
         </footer>
     </div>
 
@@ -50,5 +53,6 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="{% static 'js/search.js' %}"></script>
     <script src="{% static 'js/competitions.js' %}"></script>
+    <script src="{% static 'js/i18n.js' %}"></script>
 </body>
 </html>

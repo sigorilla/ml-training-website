@@ -1,5 +1,7 @@
 {
   "SECRET_KEY": "YOUR SECRET KEY",
   "DEBUG": true,
-  "DATABASE_URL": "postgres://USER:LOGIN@HOST:PORT/DB_NAME"
+  "DATABASE_URL": "postgres://USER:LOGIN@HOST:PORT/DB_NAME",
+  "TITLE": "Title of the site",
+  "DESCRIPTION": "Description of the site"
 }

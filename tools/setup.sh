@@ -18,7 +18,7 @@ RESULT=$( virtualenv --version )
 if [ ${RESULT} ]
 then
     echo "Virtualenv has $RESULT version"
-    virtualenv venv -p python2.7
+    virtualenv .venv -p python2.7
 else
     echo "Installing virtualenv."
     pip install virtualenv
@@ -27,13 +27,13 @@ fi
 echo "To activate the virtual environment run following command:"
 case ${OS} in
     Darwin*|Linux*)
-        echo ">> . venv/bin/activate"
+        echo ">> . .venv/bin/activate"
         ;;
     CYGWIN*|MSYS*)
-        echo ">> venv/Scripts/activate.bat"
+        echo ">> .venv/Scripts/activate.bat"
         ;;
     MINGW*)
-        echo ">> . venv/Scripts/activate"
+        echo ">> . .venv/Scripts/activate"
         ;;
     *)
         echo ">> Try googling... :("

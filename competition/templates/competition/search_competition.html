@@ -1,7 +1,10 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
-    <h2>Результат поиска: {{ query }}</h2>
+    <h2>{% blocktrans trimmed %}
+        Search results for <em>{{ query }}</em>
+    {% endblocktrans %}</h2>
     <hr>
     {% include 'competition/competition_iterator.html' with competitions=competitions %}
 {% endblock %}

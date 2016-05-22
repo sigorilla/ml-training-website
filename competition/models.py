@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
@@ -13,8 +13,8 @@ DEFAULT_IMAGE = '/static/img/competition-logo.svg'
 class Link(models.Model):
 
     class Meta:
-        verbose_name = 'ссылка'
-        verbose_name_plural = 'ссылки'
+        verbose_name = _('link')
+        verbose_name_plural = _('links')
         ordering = ['title']
 
     def __str__(self):
@@ -31,16 +31,16 @@ class Link(models.Model):
         ('TP', '_top'),
     )
 
-    title = models.CharField(max_length=200, verbose_name='текст')
-    href = models.CharField(max_length=200, verbose_name='ссылка')
-    target = models.CharField(max_length=2, choices=TARGET_CHOICES, default='EM', verbose_name='как открыть?')
+    title = models.CharField(max_length=200, verbose_name=_('title'))
+    href = models.CharField(max_length=200, verbose_name=_('href'))
+    target = models.CharField(max_length=2, choices=TARGET_CHOICES, default='EM', verbose_name=_('target'))
 
 
 class Competition(models.Model):
 
     class Meta:
-        verbose_name = 'соревнование'
-        verbose_name_plural = 'соревнования'
+        verbose_name = _('competition')
+        verbose_name_plural = _('competitions')
         ordering = ['-finish_date', '-pub_date']
 
     def __str__(self):
@@ -55,22 +55,22 @@ class Competition(models.Model):
     def get_image_url(self):
         return self.image if not self.image == DEFAULT_IMAGE else None
 
-    title = models.CharField(max_length=200, verbose_name='заголовок')
-    content = models.TextField(verbose_name='содержимое')
-    pub_date = models.DateTimeField(auto_now_add=True, verbose_name='дата публикации')
-    upd_date = models.DateTimeField(auto_now=True, verbose_name='дата обновления', blank=True)
-    start_date = models.DateTimeField(verbose_name='дата начала', default=timezone.now, blank=False)
-    submission_deadline = models.DateTimeField(default=timezone.now)
-    entry_deadline = models.DateTimeField(default=timezone.now)
-    finish_date = models.DateTimeField(verbose_name='дата окончания', default=timezone.now, blank=False)
-    active = models.BooleanField(default=False, verbose_name='активно')
-    image = models.TextField(verbose_name='изображение', default=DEFAULT_IMAGE)
-    link = models.URLField(verbose_name='ссылка', default='#', blank=False)
-    links = models.ManyToManyField(Link, verbose_name='материалы', blank=True)
+    title = models.CharField(max_length=200, verbose_name=_('title'))
+    content = models.TextField(verbose_name=_('description'))
+    pub_date = models.DateTimeField(auto_now_add=True, verbose_name=_('published date'))
+    upd_date = models.DateTimeField(auto_now=True, verbose_name=_('updated date'), blank=True)
+    start_date = models.DateTimeField(verbose_name=_('start date'), default=timezone.now, blank=False)
+    submission_deadline = models.DateTimeField(default=timezone.now, verbose_name=_('submission deadline'))
+    entry_deadline = models.DateTimeField(default=timezone.now, verbose_name=_('entry deadline'))
+    finish_date = models.DateTimeField(verbose_name=_('finish date'), default=timezone.now, blank=False)
+    active = models.BooleanField(default=False, verbose_name=_('active?'))
+    image = models.TextField(verbose_name=_('url for logo'), default=DEFAULT_IMAGE)
+    link = models.URLField(verbose_name=_('site link'), default='#', blank=False)
+    links = models.ManyToManyField(Link, verbose_name=_('materials'), blank=True)
 
     def was_published_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
     was_published_recently.admin_order_field = 'pub_date'
     was_published_recently.boolean = True
-    was_published_recently.short_description = 'опубликовано недавно?'
+    was_published_recently.short_description = _('was published recently?')
