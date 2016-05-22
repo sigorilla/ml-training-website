@@ -1,7 +1,7 @@
 {% if competitions %}
     <table class="table table-condensed table-hover table-striped competition-list">
         <col width="60%">
-        <col align="right">
+        <col align="left">
     {% for competition in competitions %}
         {% if competition.active %}
             <tr class="competition-item">
@@ -9,7 +9,7 @@
                     <a href="{% url 'competition:detail' competition.id %}" class="competition-title">{{ competition.title|title }}</a>
                 </td>
                 <td>
-                    <span class="competition-date">{{ competition.finish_date|date }}</span>
+                    с <span class="competition-date">{{ competition.start_date|date }}</span> по <span class="competition-date">{{ competition.finish_date|date }}</span>
                 </td>
             </tr>
         {% endif %}

@@ -7,9 +7,8 @@
         autocomplete="off"
     >
     <div class="input-group-btn">
-{# TODO: добавить фильтр по дате. #}
         <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i></button>
+            <button type="button" class="btn btn-default dropdown-toggle search-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i></button>
             <ul class="dropdown-menu dropdown-menu-right">
                 <li><a href="#" class="for-actual" data-type="checkbox"><input type="checkbox" name="actual" class="hidden" /> Показать активные?</a></li>
             </ul>
@@ -20,10 +19,8 @@
         </button>
     </div>
 </form>
-<div>
-    <div class="search-preview popover bottom">
-        <div class="arrow"></div>
-        <h3 class="popover-title">Результаты поиска</h3>
-        <div class="popover-content"></div>
-    </div>
+<div class="search-preview popover bottom">
+    <div class="arrow"></div>
+    <h3 class="popover-title">Результаты поиска</h3>
+    <div class="popover-content"></div>
 </div>

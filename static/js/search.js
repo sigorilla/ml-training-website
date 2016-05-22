@@ -9,8 +9,10 @@ function init() {
 var TIMER = 2000;
 
 function Search() {
+    this._$form = $('.search-form');
     this._$input = $('.search-input');
     this._$preview = $('.search-preview');
+    this._$filter = $('.search-filter');
     this._$checkbox = $('.search-form .dropdown-menu a[data-type = checkbox]');
     this._timer = null;
 
@@ -45,6 +47,7 @@ Search.prototype = {
         this._$checkbox.on({
             click: this._onCheckboxClick.bind(this)
         });
+        $('html').on('click', this._onOutsideClick.bind(this))
     },
 
     /**
@@ -63,7 +66,7 @@ Search.prototype = {
     },
 
     _setTimer: function () {
-        if (!this._timer && !this._$input.is(':focus')) {
+        if (!this._timer && !this._$input.is(':focus') && !this._$preview.is(':hover')) {
             this._timer = window.setTimeout(this._hidePreview.bind(this), TIMER);
         }
     },
@@ -97,6 +100,19 @@ Search.prototype = {
         $checkbox.attr('checked', !$checkbox.attr('checked'));
         $checkbox.trigger('change');
         $element.toggleClass('checked', Boolean($checkbox.attr('checked')));
+    },
+
+    /**
+     * @param {Event} e
+     */
+    _onOutsideClick: function (e) {
+        var $target = $(e.target);
+        if (this._$filter.find($target).length !== 0 || $target === this._$filter ||
+            (this._$form !== $target &&
+            this._$form.find($target).length === 0 &&
+            this._$preview.find($target).length === 0)) {
+            this._hidePreview();
+        }
     }
 };
 

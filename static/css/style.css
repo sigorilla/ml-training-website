@@ -8,6 +8,7 @@ div {
 
 .search-preview {
     min-width: 100%;
+    top: 100%;
 }
 
 .search-form a[data-type = checkbox].checked {
