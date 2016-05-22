@@ -7,6 +7,8 @@ from django.utils import timezone
 
 import datetime
 
+DEFAULT_IMAGE = '/static/img/competition-logo.svg'
+
 
 class Link(models.Model):
 
@@ -50,15 +52,19 @@ class Competition(models.Model):
     def get_absolute_url(self):
         return reverse('competition:detail', kwargs={'pk': self.pk})
 
+    def get_image_url(self):
+        return self.image if not self.image == DEFAULT_IMAGE else None
+
     title = models.CharField(max_length=200, verbose_name='заголовок')
     content = models.TextField(verbose_name='содержимое')
     pub_date = models.DateTimeField(auto_now_add=True, verbose_name='дата публикации')
+    upd_date = models.DateTimeField(auto_now=True, verbose_name='дата обновления', blank=True)
     start_date = models.DateTimeField(verbose_name='дата начала', default=timezone.now, blank=False)
     submission_deadline = models.DateTimeField(default=timezone.now)
     entry_deadline = models.DateTimeField(default=timezone.now)
     finish_date = models.DateTimeField(verbose_name='дата окончания', default=timezone.now, blank=False)
     active = models.BooleanField(default=False, verbose_name='активно')
-    image = models.TextField(verbose_name='изображение', default='/static/img/competition-logo.svg')
+    image = models.TextField(verbose_name='изображение', default=DEFAULT_IMAGE)
     link = models.URLField(verbose_name='ссылка', default='#', blank=False)
     links = models.ManyToManyField(Link, verbose_name='материалы', blank=True)
 

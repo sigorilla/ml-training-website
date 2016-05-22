@@ -13,10 +13,10 @@ class CompetitionAdmin(admin.ModelAdmin):
         ]}),
         (u'Больше информации', {'fields': ['links'], 'classes': ['collapse']}),
     ]
-    list_display = ('title', 'pub_date', 'active', 'was_published_recently')
-    list_filter = ['pub_date', 'active']
+    list_display = ('title', 'start_date', 'active', 'was_published_recently')
+    list_filter = ['pub_date', 'upd_date', 'active']
     search_fields = ['title', 'content']
-    readonly_fields = ('pub_date',)
+    readonly_fields = ('pub_date', 'upd_date',)
 
 admin.site.register(Competition, CompetitionAdmin)
 admin.site.register(Link)

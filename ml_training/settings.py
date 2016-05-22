@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for gettingstarted project, on Heroku. For more info, see:
 https://github.com/heroku/heroku-django-template
@@ -43,6 +44,7 @@ INSTALLED_APPS = (
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'ml_training.middleware.AppendOrRemoveSlashMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
@@ -50,6 +52,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 )
+
+APPEND_SLASH = True
 
 ROOT_URLCONF = 'ml_training.urls'
 
@@ -67,6 +71,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'ml_training.context_processors.current_uri',
+                'ml_training.context_processors.constants',
             ],
         },
     },
@@ -133,3 +139,7 @@ STATICFILES_DIRS = (
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+# Site const
+TITLE = u'Тренировки ML'
+DESCRIPTION = u'Тренировки по Машинному обучению, анализ данных, разбор решений соревнований на Kaggle.'
