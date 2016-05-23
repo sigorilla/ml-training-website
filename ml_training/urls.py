@@ -1,15 +1,12 @@
 from django.conf.urls import include, url
-from django.conf.urls.i18n import i18n_patterns
+from snippets import simple_i18n_patterns as i18n_patterns
 from django.contrib import admin
-from django.core.urlresolvers import reverse_lazy
-from django.views.generic import RedirectView
 
 import views
 
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^$', RedirectView.as_view(url=reverse_lazy('competition:index'))),
     url(r'^i18n/', include('django.conf.urls.i18n')),
 ]
 
