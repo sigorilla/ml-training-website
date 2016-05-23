@@ -12,19 +12,12 @@ class RssCompetitionsFeed(Feed):
     description = DESCRIPTION
     link = '/'
     categories = ('ml', 'competitions')
+    author_name = 'Petr Romov'
+    author_email = 'romovpa@yandex.ru'
 
     def get_object(self, request, *args, **kwargs):
         if request.user.is_staff and request.user.is_active:
             return request.user
-
-    def author_name(self, user):
-        if user:
-            name = user.get_full_name()
-            return name if name else None
-
-    def author_email(self, user):
-        if user:
-            return user.email if user.email else None
 
     def items(self):
         return Competition.objects.filter(active__exact=True)[:20]
@@ -40,7 +33,7 @@ class RssCompetitionsFeed(Feed):
         if url is None:
             return None
         headers = requests.head(url).headers
-        type = header['content-type']
+        type = headers['content-type']
         if not type.startswith('image'):
             type = 'image/jpeg'
         return [Enclosure(url=url, length=headers['content-length'], mime_type=type)]
