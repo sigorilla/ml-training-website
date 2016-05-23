@@ -1,3 +1,5 @@
+import time
+
 import requests
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed, Enclosure
@@ -11,6 +13,19 @@ class RssCompetitionsFeed(Feed):
     link = '/'
     categories = ('ml', 'competitions')
 
+    def get_object(self, request, *args, **kwargs):
+        if request.user.is_staff and request.user.is_active:
+            return request.user
+
+    def author_name(self, user):
+        if user:
+            name = user.get_full_name()
+            return name if name else None
+
+    def author_email(self, user):
+        if user:
+            return user.email if user.email else None
+
     def items(self):
         return Competition.objects.filter(active__exact=True)[:20]
 
@@ -21,7 +36,7 @@ class RssCompetitionsFeed(Feed):
         return item.content
 
     def item_enclosures(self, item):
-        url = item.get_image_url()
+        url = item.get_image_url().replace('https://', 'http://')
         if url is None:
             return None
         headers = requests.head(url).headers
@@ -32,6 +47,7 @@ class RssCompetitionsFeed(Feed):
 
     def item_updateddate(self, item):
         return item.upd_date
+
 
 class AtomCompetitionsFeed(RssCompetitionsFeed):
     feed_type = Atom1Feed

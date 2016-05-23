@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -67,6 +68,7 @@ class Competition(models.Model):
     image = models.TextField(verbose_name=_('url for logo'), default=DEFAULT_IMAGE)
     link = models.URLField(verbose_name=_('site link'), default='#', blank=False)
     links = models.ManyToManyField(Link, verbose_name=_('materials'), blank=True)
+    author = models.ForeignKey(User, verbose_name=_('author'))
 
     def was_published_recently(self):
         now = timezone.now()
