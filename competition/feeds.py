@@ -40,7 +40,10 @@ class RssCompetitionsFeed(Feed):
         if url is None:
             return None
         headers = requests.head(url).headers
-        return [Enclosure(url=url, length=headers['content-length'], mime_type=headers['content-type'])]
+        type = header['content-type']
+        if not type.startswith('image'):
+            type = 'image/jpeg'
+        return [Enclosure(url=url, length=headers['content-length'], mime_type=type)]
 
     def item_pubdate(self, item):
         return item.pub_date
@@ -52,4 +55,3 @@ class RssCompetitionsFeed(Feed):
 class AtomCompetitionsFeed(RssCompetitionsFeed):
     feed_type = Atom1Feed
     subtitle = RssCompetitionsFeed.description
-
