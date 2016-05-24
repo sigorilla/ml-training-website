@@ -137,7 +137,7 @@ msgstr "Все"
 
 #: competition/templates/competition/competition_iterator.html:23
 msgid "finished"
-msgstr "окончание"
+msgstr "завершено"
 
 #: competition/templates/competition/competition_iterator.html:26
 msgid "Remaining"
