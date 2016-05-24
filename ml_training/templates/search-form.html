@@ -1,5 +1,5 @@
 {% load i18n %}
-<form class="input-group search-form" method="get" action="{% url 'competition:search' %}">
+<form class="input-group search-form" method="get" action="{% url 'competition:search' %}?{{ FILTER_KEY }}={{ filter }}">
     <input
         type="text"
         name="q"
@@ -8,7 +8,7 @@
         autocomplete="off"
     >
     <div class="input-group-btn">
-        <div class="btn-group">
+        <div class="btn-group hidden">
             <button type="button" class="btn btn-default dropdown-toggle search-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i></button>
             <ul class="dropdown-menu dropdown-menu-right">
                 <li><a href="#" class="for-actual" data-type="checkbox"><input type="checkbox" name="actual" class="hidden" />{% trans "Choose active" %}</a></li>

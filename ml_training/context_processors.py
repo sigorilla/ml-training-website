@@ -1,4 +1,5 @@
-from ml_training.settings import TITLE, DESCRIPTION
+from ml_training.settings import TITLE, DESCRIPTION, FILTER_KEY
+
 
 def current_uri(request):
     return {
@@ -11,5 +12,6 @@ def current_uri(request):
 def constants(request):
     return {
         'TITLE': TITLE,
-        'DESCRIPTION': DESCRIPTION
+        'DESCRIPTION': DESCRIPTION,
+        'FILTER_KEY': FILTER_KEY
     }

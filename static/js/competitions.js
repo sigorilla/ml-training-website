@@ -2,30 +2,50 @@
 
 $(document).ready(init);
 
+/**
+ * Такой же как в settings.py.
+ * @type {string}
+ */
+var FILTER_KEY = 'filter';
+
+function parseQuery() {
+    var query = {};
+    window.location.search.substring(1).split('&').forEach(function (param) {
+        var params = param.split('=');
+        query[decodeURIComponent(params[0])] = decodeURIComponent(params[1]);
+    });
+    return query;
+}
+
+function stringifyQuery(query) {
+    return '?' + Object.keys(query).map(function (key) {
+        return encodeURIComponent(key) + '=' + encodeURIComponent(query[key]);
+    }).join('&');
+}
+
 function init() {
     new Competitions();
 }
 
 function Competitions() {
-    this._$competitions = $('.competition-item');
-    this._$showMore = $('.competition-item .show-more');
+    this._$filters = $('.competition-filter a');
+
+    this._updateFilter();
     this._addEventListeners();
 }
 
 Competitions.prototype = {
-    _addEventListeners: function () {
-        this._$competitions.find('.more-information').hide().removeClass('hidden');
-        this._$showMore.on({
-            click: this._onClickShowMore.bind(this)
-        });
-    },
+    _addEventListeners: function () {},
 
-    /**
-     * @param {Event} e
-     */
-    _onClickShowMore: function (e) {
-        e.preventDefault();
-        $(e.currentTarget).parents('.competition-item').find('.more-information').toggle(300);
+    _updateFilter: function () {
+        var query = parseQuery();
+
+        this._$filters.each(function (index) {
+            var $link = this._$filters.eq(index);
+            query[FILTER_KEY] = $link.data(FILTER_KEY);
+            var search = stringifyQuery(query);
+            $link.attr('href', window.location.pathname + search);
+        }.bind(this));
     }
 };
 

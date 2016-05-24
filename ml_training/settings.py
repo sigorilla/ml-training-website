@@ -38,10 +38,9 @@ ALLOWED_HOSTS = [
     'mltrainings.ru',
     'mltrainings.ru.',
 ]
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_HTTPONLY = True
-X_FRAME_OPTIONS = 'DENY'
+
+if not DEBUG:
+    X_FRAME_OPTIONS = 'DENY'
 
 # Application definition
 
@@ -55,10 +54,13 @@ INSTALLED_APPS = (
     'competition',
 )
 
+FILTER_KEY = 'filter'
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'ml_training.middleware.AppendOrRemoveSlashMiddleware',
+    'ml_training.middleware.SaveFilterQueryMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
@@ -139,13 +141,11 @@ USE_L10N = True
 USE_TZ = True
 
 DATE_FORMAT = 'j E Y'
+SHORT_DATE_FORMAT = 'd.m.y'
 DATETIME_FORMAT = 'j E Y H:i'
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-# Allow all host headers
-ALLOWED_HOSTS = ['*']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/

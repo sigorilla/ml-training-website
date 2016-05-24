@@ -42,7 +42,7 @@ class Competition(models.Model):
     class Meta:
         verbose_name = _('competition')
         verbose_name_plural = _('competitions')
-        ordering = ['-finish_date', '-pub_date']
+        ordering = ['finish_date']
 
     def __str__(self):
         return self.title
@@ -56,6 +56,11 @@ class Competition(models.Model):
     def get_image_url(self):
         return self.image if not self.image == DEFAULT_IMAGE else None
 
+    @property
+    def is_finished(self):
+        now = timezone.now()
+        return now > self.finish_date
+
     title = models.CharField(max_length=200, verbose_name=_('title'))
     content = models.TextField(verbose_name=_('description'))
     pub_date = models.DateTimeField(auto_now_add=True, verbose_name=_('published date'))
@@ -64,11 +69,11 @@ class Competition(models.Model):
     submission_deadline = models.DateTimeField(default=timezone.now, verbose_name=_('submission deadline'))
     entry_deadline = models.DateTimeField(default=timezone.now, verbose_name=_('entry deadline'))
     finish_date = models.DateTimeField(verbose_name=_('finish date'), default=timezone.now, blank=False)
-    active = models.BooleanField(default=False, verbose_name=_('active?'))
+    active = models.BooleanField(default=True, verbose_name=_('active?'))
     image = models.TextField(verbose_name=_('url for logo'), default=DEFAULT_IMAGE)
     link = models.URLField(verbose_name=_('site link'), default='#', blank=False)
     links = models.ManyToManyField(Link, verbose_name=_('materials'), blank=True)
-    author = models.ForeignKey(User, verbose_name=_('author'))
+    author = models.ForeignKey(User, verbose_name=_('author'), default=1)
 
     def was_published_recently(self):
         now = timezone.now()

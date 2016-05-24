@@ -6,6 +6,16 @@ from django.core import urlresolvers
 from django.conf import settings
 
 
+class SaveFilterQueryMiddleware(object):
+
+    def process_request(self, request):
+        if settings.FILTER_KEY not in request.GET:
+            new_path = '%s?%s%s%s=%s' % (request.path_info, request.META['QUERY_STRING'],
+                                         '&' if request.META['QUERY_STRING'] else '',
+                                         settings.FILTER_KEY, 'active')
+            return http.HttpResponsePermanentRedirect(new_path)
+
+
 class AppendOrRemoveSlashMiddleware(object):
     """
     Like django's built in APPEND_SLASH functionality, but also works in reverse. Eg

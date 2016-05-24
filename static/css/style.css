@@ -25,6 +25,14 @@ div {
     padding: 10px 5px;
 }
 
+.competition-item {
+    border-left: 3px solid transparent;
+}
+
+.competition-item._active {
+    border-left-color: lightblue;
+}
+
 .competition-item:not(:last-child) {
     border-bottom: 1px solid #eee;
 }
@@ -33,8 +41,12 @@ div {
     background-color: #edecd6;
 }
 
-.competition-date:first-letter {
-    text-transform: capitalize;
+.competition-details {
+    margin-top: 10px;
+}
+
+.competition-filter {
+    margin-bottom: 10px;
 }
 
 /**********

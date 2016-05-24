@@ -16,7 +16,7 @@ function Search() {
     this._$checkbox = $('.search-form .dropdown-menu a[data-type = checkbox]');
     this._timer = null;
 
-    this._parseSearch();
+    // this._parseSearch();
     this._addEventListeners();
 }
 
@@ -57,7 +57,7 @@ Search.prototype = {
         var $form = this._$input.parents('form');
         var q = $.trim(this._$input.val());
         if (q) {
-            var query = $form.attr('action') + '?' + $form.serialize();
+            var query = $form.attr('action') + '&' + $form.serialize();
             this._$preview.find('.popover-content').html('&nbsp;').load(query, function () {
                 this._unsetTimer();
                 this._$preview.show();

@@ -1,9 +1,16 @@
 {% load i18n %}
+<div class="competition-filter">
+    <div class="btn-group">
+        <a class="btn btn-sm btn-{% if filter == 'active'%}primary{% else %}default{% endif %}" data-{{ FILTER_KEY }}="active">{% trans "Active" %}</a>
+        <a class="btn btn-sm btn-{% if filter == 'finished'%}primary{% else %}default{% endif %}" data-{{ FILTER_KEY }}="finished">{% trans "Finished" %}</a>
+        <a class="btn btn-sm btn-{% if filter == 'all'%}primary{% else %}default{% endif %}" data-{{ FILTER_KEY }}="all">{% trans "All" %}</a>
+    </div>
+</div>
 <div class="competition-list">
 {% for competition in competitions %}
-    <div class="media competition-item" data-id="{{ competition.id }}">
+    <div class="media competition-item {{ competition.is_finished|yesno:'_finished,_active' }}" data-id="{{ competition.id }}">
         <div class="media-left">
-            <a href="{{ competition.link }}">
+            <a href="{{ competition.link }}" target="_blank">
                 <img src="{{ competition.image }}" alt="Logo" class="media-object" style="width: 150px;">
             </a>
         </div>
@@ -11,11 +18,14 @@
             <h4 class="media-heading competition-title">
                 <a href="{{ competition.link }}" target="_blank">{{ competition.title }}</a>
             </h4>
-            <div class="competition-date">{% trans "start date" %}: {{ competition.start_date|date }}</div>
-            <div class="competition-date">{% trans "entry deadline" %}: {{ competition.entry_deadline|date }} ({% trans "remaining" %} {{ competition.entry_deadline|timeuntil }})</div>
-            <div class="competition-date">{% trans "submission deadline" %}: {{ competition.submission_deadline|date }} ({% trans "remaining" %} {{ competition.submission_deadline|timeuntil }})</div>
-            <div class="competition-date">{% trans "finish date" %}: {{ competition.finish_date|date }} ({% trans "remaining" %} {{ competition.finish_date|timeuntil }})</div>
-            <div>
+            <div class="competition-date">
+                {{ competition.start_date|date }} &mdash; {{ competition.finish_date|date }}
+                {% if competition.is_finished %}(<strong>{% trans "finished" %}</strong>){% endif %}
+            </div>
+            {% if not competition.is_finished %}
+                <div class="competition-date">{% trans "Remaining" %} {{ competition.finish_date|timeuntil }}</div>
+            {% endif %}
+            <div class="competition-details">
                 {{ competition.content|safe }}
                 {% if competition.links.all %}
                     <div>{% trans "Materials" %}:</div>

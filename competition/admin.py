@@ -6,9 +6,9 @@ from models import Competition, Link
 class CompetitionAdmin(admin.ModelAdmin):
     fieldsets = [
         (_('Create new competition'), {'fields': [
-            'title', 'content', 'link', 'active',
+            'title', 'content', 'link',
             'start_date', 'finish_date', 'entry_deadline', 'submission_deadline',
-            'image', 'links'
+            'image', 'links', 'active',
         ]})
     ]
     list_display = ('title', 'start_date', 'active', 'was_published_recently')

@@ -1,5 +1,8 @@
+from django.conf import settings
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.views.decorators.cache import never_cache
 from django.views import generic
@@ -46,7 +49,30 @@ class NeverCacheMixin(object):
         return never_cache(view)
 
 
-class CompetitionListView(NeverCacheMixin, generic.ListView):
+class FilterListMixin(generic.ListView):
+
+    def get_context_data(self, **kwargs):
+        context = super(FilterListMixin, self).get_context_data(**kwargs)
+        filter_by = self.request.GET[settings.FILTER_KEY].strip() \
+            if settings.FILTER_KEY in self.request.GET else 'active'
+        if filter_by not in ['active', 'finished', 'all']:
+            filter_by = 'active'
+        active_queryset = []
+        finished_queryset = []
+        if filter_by == 'active' or filter_by == 'all':
+            active_queryset = self.get_queryset().filter(finish_date__gte=timezone.now()).order_by('finish_date')
+        if filter_by == 'finished' or filter_by == 'all':
+            finished_queryset = self.get_queryset().filter(finish_date__lte=timezone.now()).order_by('-finish_date')
+
+        queryset = list(active_queryset) + list(finished_queryset)
+        if len(queryset):
+            context[self.context_object_name] = queryset
+
+        context['filter'] = filter_by
+        return context
+
+
+class CompetitionListView(NeverCacheMixin, FilterListMixin):
     model = Competition
     context_object_name = 'competitions'
     paginate_by = 20
@@ -72,7 +98,7 @@ class CompetitionDetailView(NeverCacheMixin, generic.DetailView):
         return context
 
 
-class SearchCompetitionListView(SearchMixin, NeverCacheMixin, generic.ListView):
+class SearchCompetitionListView(SearchMixin, NeverCacheMixin, FilterListMixin):
     model = Competition
     template_name = 'competition/search_competition.html'
     context_object_name = 'competitions'
@@ -83,9 +109,6 @@ class SearchCompetitionListView(SearchMixin, NeverCacheMixin, generic.ListView):
             query_string = self.request.GET['q'].strip()
             entry_query = self.get_query(query_string, ['title', 'content'])
             queryset = queryset.filter(entry_query)
-
-        if 'actual' in self.request.GET:
-            queryset = queryset.filter(finish_date__gte=timezone.now())
 
         return queryset
 
@@ -104,3 +127,8 @@ class SearchCompetitionListView(SearchMixin, NeverCacheMixin, generic.ListView):
             context['query'] = ''
             context['title'] = _('Search')
         return context
+
+
+def detail_redirect(request, pk):
+    competition = get_object_or_404(Competition, pk=pk)
+    return HttpResponseRedirect(competition.link)

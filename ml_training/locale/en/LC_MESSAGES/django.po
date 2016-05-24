@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-24 11:51+0300\n"
+"POT-Creation-Date: 2016-05-25 01:29+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "links"
 msgstr ""
 
-#: competition/models.py:35 competition/models.py:59
+#: competition/models.py:35 competition/models.py:64
 msgid "title"
 msgstr ""
 
@@ -49,98 +49,100 @@ msgstr ""
 msgid "competitions"
 msgstr ""
 
-#: competition/models.py:60
+#: competition/models.py:65
 msgid "description"
 msgstr ""
 
-#: competition/models.py:61
+#: competition/models.py:66
 msgid "published date"
 msgstr ""
 
-#: competition/models.py:62
+#: competition/models.py:67
 msgid "updated date"
 msgstr ""
 
-#: competition/models.py:63
-#: competition/templates/competition/competition_detail.html:14
-#: competition/templates/competition/competition_iterator.html:14
+#: competition/models.py:68
+#: competition/templates/competition/competition_detail.html:15
 msgid "start date"
 msgstr ""
 
-#: competition/models.py:64
-#: competition/templates/competition/competition_detail.html:16
-#: competition/templates/competition/competition_iterator.html:16
+#: competition/models.py:69
+#: competition/templates/competition/competition_detail.html:17
 msgid "submission deadline"
 msgstr ""
 
-#: competition/models.py:65
-#: competition/templates/competition/competition_detail.html:15
-#: competition/templates/competition/competition_iterator.html:15
+#: competition/models.py:70
+#: competition/templates/competition/competition_detail.html:16
 msgid "entry deadline"
 msgstr ""
 
-#: competition/models.py:66
-#: competition/templates/competition/competition_detail.html:17
-#: competition/templates/competition/competition_iterator.html:17
+#: competition/models.py:71
+#: competition/templates/competition/competition_detail.html:18
 msgid "finish date"
 msgstr ""
 
-#: competition/models.py:67
+#: competition/models.py:72
 msgid "active?"
 msgstr ""
 
-#: competition/models.py:68
+#: competition/models.py:73
 msgid "url for logo"
 msgstr ""
 
-#: competition/models.py:69
+#: competition/models.py:74
 msgid "site link"
 msgstr ""
 
-#: competition/models.py:70
+#: competition/models.py:75
 msgid "materials"
 msgstr ""
 
-#: competition/models.py:71
+#: competition/models.py:76
 msgid "author"
 msgstr ""
 
-#: competition/models.py:78
+#: competition/models.py:83
 msgid "was published recently?"
 msgstr ""
 
-#: competition/templates/competition/competition_detail.html:13
+#: competition/templates/competition/competition_detail.html:14
 msgid "Competition site"
 msgstr ""
 
-#: competition/templates/competition/competition_detail.html:15
 #: competition/templates/competition/competition_detail.html:16
 #: competition/templates/competition/competition_detail.html:17
-#: competition/templates/competition/competition_iterator.html:15
-#: competition/templates/competition/competition_iterator.html:16
-#: competition/templates/competition/competition_iterator.html:17
+#: competition/templates/competition/competition_detail.html:18
 msgid "remaining"
 msgstr ""
 
-#: competition/templates/competition/competition_detail.html:22
-#: competition/templates/competition/competition_iterator.html:22
+#: competition/templates/competition/competition_detail.html:23
+#: competition/templates/competition/competition_iterator.html:31
 msgid "Materials"
 msgstr ""
 
-#: competition/templates/competition/competition_iterator.html:18
-msgid "Details"
+#: competition/templates/competition/competition_iterator.html:4
+msgid "Active"
 msgstr ""
 
-#: competition/templates/competition/competition_iterator.html:36
+#: competition/templates/competition/competition_iterator.html:5
+msgid "Finished"
+msgstr ""
+
+#: competition/templates/competition/competition_iterator.html:6
+msgid "All"
+msgstr ""
+
+#: competition/templates/competition/competition_iterator.html:23
+msgid "finished"
+msgstr ""
+
+#: competition/templates/competition/competition_iterator.html:26
+msgid "Remaining"
+msgstr ""
+
+#: competition/templates/competition/competition_iterator.html:45
 #: competition/templates/competition/competition_iterator_simple.html:20
 msgid "Oops, no competitions found"
-msgstr ""
-
-#: competition/templates/competition/competition_iterator_simple.html:12
-#, python-format
-msgid ""
-"from <span class=\"competition-date\">%(start)s</span> to <span class="
-"\"competition-date\">%(finish)s</span>"
 msgstr ""
 
 #: competition/templates/competition/search_competition.html:5
@@ -148,7 +150,7 @@ msgstr ""
 msgid "Search results for <em>%(query)s</em>"
 msgstr ""
 
-#: competition/views.py:105 ml_training/templates/search-form.html.py:7
+#: competition/views.py:128 ml_training/templates/search-form.html.py:7
 msgid "Search"
 msgstr ""
 
@@ -161,11 +163,11 @@ msgid ""
 "Training on ML, data analysis, decisions analysis of competition at Kaggle"
 msgstr ""
 
-#: ml_training/settings.py:116
+#: ml_training/settings.py:131
 msgid "English"
 msgstr ""
 
-#: ml_training/settings.py:117
+#: ml_training/settings.py:132
 msgid "Russian"
 msgstr ""
 
@@ -175,6 +177,14 @@ msgstr ""
 
 #: ml_training/templates/base.html:36
 msgid "YouTube"
+msgstr ""
+
+#: ml_training/templates/base.html:37
+msgid "New competition"
+msgstr ""
+
+#: ml_training/templates/base.html:37
+msgid "Notify about the competition"
 msgstr ""
 
 #: ml_training/templates/search-form.html:14
