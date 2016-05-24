@@ -17,7 +17,10 @@ function parseQuery() {
     return query;
 }
 
-function stringifyQuery(query) {
+function stringifyQuery(query, removeKeys) {
+    removeKeys.forEach(function (key) {
+        delete query[key];
+    });
     return '?' + Object.keys(query).map(function (key) {
         return encodeURIComponent(key) + '=' + encodeURIComponent(query[key]);
     }).join('&');
@@ -43,7 +46,7 @@ Competitions.prototype = {
         this._$filters.each(function (index) {
             var $link = this._$filters.eq(index);
             query[FILTER_KEY] = $link.data(FILTER_KEY);
-            var search = stringifyQuery(query);
+            var search = stringifyQuery(query, ['page']);
             $link.attr('href', window.location.pathname + search);
         }.bind(this));
     }

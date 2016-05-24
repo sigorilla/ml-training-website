@@ -54,7 +54,7 @@
             {% ifequal num page_obj.number %}
                 <li class="active"><a>{{ num }}</a></li>
             {% else %}
-                <li><a href="?page={{ num }}">{{ num }}</a></li>
+                <li><a href="?{{ request.META.QUERY_STRING }}&page={{ num }}">{{ num }}</a></li>
             {% endifequal %}
         {% endfor %}
     </ul>

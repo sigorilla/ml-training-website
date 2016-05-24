@@ -1,3 +1,5 @@
+from itertools import chain
+
 from django.conf import settings
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
@@ -50,36 +52,40 @@ class NeverCacheMixin(object):
 
 
 class FilterListMixin(generic.ListView):
+    filter_by = 'active'
+
+    def _get_queryset(self, queryset=None):
+        if not queryset:
+            queryset = super(FilterListMixin, self).get_queryset()
+        queryset = queryset.filter(active__exact=True)
+        self.filter_by = self.request.GET[settings.FILTER_KEY].strip() \
+            if settings.FILTER_KEY in self.request.GET else 'active'
+        if self.filter_by not in ['active', 'finished', 'all']:
+            self.filter_by = 'active'
+        active_queryset = []
+        finished_queryset = []
+        if self.filter_by == 'active' or self.filter_by == 'all':
+            active_queryset = queryset.filter(finish_date__gte=timezone.now()).order_by('finish_date')
+        if self.filter_by == 'finished' or self.filter_by == 'all':
+            finished_queryset = queryset.filter(finish_date__lte=timezone.now()).order_by('-finish_date')
+
+        queryset = list(chain(active_queryset, finished_queryset))
+        return queryset
+
+    def get_queryset(self):
+        return self._get_queryset()
 
     def get_context_data(self, **kwargs):
         context = super(FilterListMixin, self).get_context_data(**kwargs)
-        filter_by = self.request.GET[settings.FILTER_KEY].strip() \
-            if settings.FILTER_KEY in self.request.GET else 'active'
-        if filter_by not in ['active', 'finished', 'all']:
-            filter_by = 'active'
-        active_queryset = []
-        finished_queryset = []
-        if filter_by == 'active' or filter_by == 'all':
-            active_queryset = self.get_queryset().filter(finish_date__gte=timezone.now()).order_by('finish_date')
-        if filter_by == 'finished' or filter_by == 'all':
-            finished_queryset = self.get_queryset().filter(finish_date__lte=timezone.now()).order_by('-finish_date')
-
-        queryset = list(active_queryset) + list(finished_queryset)
-        if len(queryset):
-            context[self.context_object_name] = queryset
-
-        context['filter'] = filter_by
+        context[settings.FILTER_KEY] = self.filter_by
         return context
 
 
 class CompetitionListView(NeverCacheMixin, FilterListMixin):
     model = Competition
+    template_name = 'competition/competition_list.html'
     context_object_name = 'competitions'
     paginate_by = 20
-
-    def get_queryset(self):
-        queryset = super(CompetitionListView, self).get_queryset()
-        return queryset.filter(active__exact=True)
 
 
 class CompetitionDetailView(NeverCacheMixin, generic.DetailView):
@@ -98,10 +104,8 @@ class CompetitionDetailView(NeverCacheMixin, generic.DetailView):
         return context
 
 
-class SearchCompetitionListView(SearchMixin, NeverCacheMixin, FilterListMixin):
-    model = Competition
+class SearchCompetitionListView(SearchMixin, CompetitionListView):
     template_name = 'competition/search_competition.html'
-    context_object_name = 'competitions'
 
     def get_queryset(self):
         queryset = Competition.objects.all()
@@ -110,7 +114,7 @@ class SearchCompetitionListView(SearchMixin, NeverCacheMixin, FilterListMixin):
             entry_query = self.get_query(query_string, ['title', 'content'])
             queryset = queryset.filter(entry_query)
 
-        return queryset
+        return self._get_queryset(queryset)
 
     def render_to_response(self, context, **response_kwargs):
         if self.request.is_ajax():
