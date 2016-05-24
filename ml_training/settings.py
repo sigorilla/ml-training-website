@@ -20,8 +20,8 @@ SECRET_KEY = config.get('SECRET_KEY', 'secret')
 DEBUG = bool(config.get('DEBUG', False))
 DATABASE_URL = config.get('DATABASE_URL', '')
 
-TITLE = config.get('TITLE', 'ML')
-DESCRIPTION = config.get('DESCRIPTION', 'Training on ML')
+TITLE = _('Training on ML')
+DESCRIPTION = _('Training on ML, data analysis, decisions analysis of competition at Kaggle')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -29,6 +29,19 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'ml-training.herokuapp.com',
+    'ml-training.herokuapp.com.',
+    'mltrainings.ru',
+    'mltrainings.ru.',
+]
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+X_FRAME_OPTIONS = 'DENY'
 
 # Application definition
 
@@ -111,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'ru-RU'
 LANGUAGES = [
     ('en', _('English')),
     ('ru', _('Russian')),

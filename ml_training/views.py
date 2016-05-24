@@ -3,6 +3,7 @@ from django.utils.translation import ugettext as _
 
 
 def handler403(request):
+    print(request)
     return render(request, 'error.html', {
         'error': '403',
         'title': _('Access Denied')

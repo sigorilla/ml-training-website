@@ -9,15 +9,13 @@
         </div>
         <div class="media-body">
             <h4 class="media-heading competition-title">
-                <a href="{% url 'competition:detail' competition.id %}">{{ competition.title|title }}</a>
+                <a href="{{ competition.link }}" target="_blank">{{ competition.title }}</a>
             </h4>
-            <div><a href="{{ competition.link }}" target="_blank">{% trans "Competition site" %}</a></div>
             <div class="competition-date">{% trans "start date" %}: {{ competition.start_date|date }}</div>
             <div class="competition-date">{% trans "entry deadline" %}: {{ competition.entry_deadline|date }} ({% trans "remaining" %} {{ competition.entry_deadline|timeuntil }})</div>
             <div class="competition-date">{% trans "submission deadline" %}: {{ competition.submission_deadline|date }} ({% trans "remaining" %} {{ competition.submission_deadline|timeuntil }})</div>
             <div class="competition-date">{% trans "finish date" %}: {{ competition.finish_date|date }} ({% trans "remaining" %} {{ competition.finish_date|timeuntil }})</div>
-            <div><a href="#" class="show-more">{% trans "Details" %}</a></div>
-            <div class="more-information hidden">
+            <div>
                 {{ competition.content|safe }}
                 {% if competition.links.all %}
                     <div>{% trans "Materials" %}:</div>

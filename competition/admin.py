@@ -8,9 +8,8 @@ class CompetitionAdmin(admin.ModelAdmin):
         (_('Create new competition'), {'fields': [
             'title', 'content', 'link', 'active',
             'start_date', 'finish_date', 'entry_deadline', 'submission_deadline',
-            'image'
-        ]}),
-        (_('More information'), {'fields': ['links'], 'classes': ['collapse']}),
+            'image', 'links'
+        ]})
     ]
     list_display = ('title', 'start_date', 'active', 'was_published_recently')
     list_filter = ['pub_date', 'upd_date', 'active']
