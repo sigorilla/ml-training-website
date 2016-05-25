@@ -23,11 +23,11 @@
             {% endif %}
             <div class="competition-details">
                 <div class="competition-description">{{ competition.content|safe }}</div>
-                {% if competition.materials.all %}
+                {% if competition.material_set.count %}
                     <div class="competition-materials">
                         <h5>{% trans "Materials" %}:</h5>
                         <ul>
-                        {% for material in competition.materials.all %}
+                        {% for material in competition.material_set.all %}
                             <li>
                                 {% if material.article %}
                                     <a href="{{ material.article }}" target="_blank">{{ material.title }}</a>
