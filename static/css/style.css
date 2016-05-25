@@ -41,7 +41,8 @@ div {
     background-color: #edecd6;
 }
 
-.competition-details {
+.competition-details,
+.competition-materials {
     margin-top: 10px;
 }
 

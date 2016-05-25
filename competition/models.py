@@ -37,6 +37,24 @@ class Link(models.Model):
     target = models.CharField(max_length=2, choices=TARGET_CHOICES, default='EM', verbose_name=_('target'))
 
 
+class Material(models.Model):
+
+    class Meta:
+        verbose_name = _('material')
+        verbose_name_plural = _('materials')
+
+    def __str__(self):
+        return self.title
+
+    def __unicode__(self):
+        return self.title
+
+    title = models.CharField(max_length=200, verbose_name=_('title'))
+    article = models.URLField(verbose_name=_('article link'), blank=True)
+    video = models.URLField(verbose_name=_('video link'), blank=True)
+    slides = models.URLField(verbose_name=_('slides link'), blank=True)
+
+
 class Competition(models.Model):
 
     class Meta:
@@ -72,8 +90,9 @@ class Competition(models.Model):
     active = models.BooleanField(default=True, verbose_name=_('active?'))
     image = models.TextField(verbose_name=_('url for logo'), default=DEFAULT_IMAGE)
     link = models.URLField(verbose_name=_('site link'), default='#', blank=False)
-    links = models.ManyToManyField(Link, verbose_name=_('materials'), blank=True)
+    links = models.ManyToManyField(Link, verbose_name=_('links'), blank=True)
     author = models.ForeignKey(User, verbose_name=_('author'), default=1)
+    materials = models.ManyToManyField(Material, verbose_name=_('materials'), blank=True)
 
     def was_published_recently(self):
         now = timezone.now()

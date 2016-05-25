@@ -9,11 +9,11 @@ from django.conf import settings
 class SaveFilterQueryMiddleware(object):
 
     def process_request(self, request):
-        if settings.FILTER_KEY not in request.GET:
+        if settings.FILTER_KEY not in request.GET and request.path_info.find('/admin/') == -1:
             new_path = '%s?%s%s%s=%s' % (request.path_info, request.META['QUERY_STRING'],
                                          '&' if request.META['QUERY_STRING'] else '',
                                          settings.FILTER_KEY, 'active')
-            return http.HttpResponsePermanentRedirect(new_path)
+            return http.HttpResponseRedirect(new_path)
 
 
 class AppendOrRemoveSlashMiddleware(object):
@@ -77,7 +77,8 @@ def generate_url(request, path):
     else:
         new_url = urlquote(path)
     if request.GET:
-        new_url += '?' + request.META['QUERY_STRING']
+        print(request.GET)
+        # new_url += '?' + request.META['QUERY_STRING']
     return new_url
 
 

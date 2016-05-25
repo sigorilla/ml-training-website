@@ -26,16 +26,36 @@
                 <div class="competition-date">{% trans "Remaining" %} {{ competition.finish_date|timeuntil }}</div>
             {% endif %}
             <div class="competition-details">
-                {{ competition.content|safe }}
-                {% if competition.links.all %}
-                    <div>{% trans "Materials" %}:</div>
-                    <ul>
-                    {% for link in competition.links.all %}
-                        <li>
-                            <a href="{{ link.href }}" target="{{ link.target }}">{{ link.title }}</a>
-                        </li>
-                    {% endfor %}
-                    </ul>
+                <div class="competition-description">{{ competition.content|safe }}</div>
+                {% if competition.materials.all %}
+                    <div class="competition-materials">
+                        <h5>{% trans "Materials" %}:</h5>
+                        <ul>
+                        {% for material in competition.materials.all %}
+                            <li>
+                                {% if material.article %}
+                                    <a href="{{ material.article }}" target="_blank">{{ material.title }}</a>
+                                {% else %}
+                                    <span>{{ material.title }}</span>
+                                {% endif %}
+                                {% if material.video or material.slides %}
+                                    <div class="btn-group">
+                                    {% if material.video %}
+                                        <a class="btn btn-default btn-xs" href="{{ material.video }}" target="_blank">
+                                            <i class="glyphicon glyphicon-facetime-video"></i>
+                                        </a>
+                                    {% endif %}
+                                    {% if material.slides %}
+                                        <a class="btn btn-default btn-xs" href="{{ material.slides }}" target="_blank">
+                                            <i class="glyphicon glyphicon-picture"></i>
+                                        </a>
+                                    {% endif %}
+                                    </div>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
                 {% endif %}
             </div>
         </div>

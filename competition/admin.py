@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.translation import ugettext as _
-from models import Competition, Link
+from models import Competition, Material
 
 
 class CompetitionAdmin(admin.ModelAdmin):
@@ -8,7 +8,7 @@ class CompetitionAdmin(admin.ModelAdmin):
         (_('Create new competition'), {'fields': [
             'title', 'content', 'link',
             'start_date', 'finish_date', 'entry_deadline', 'submission_deadline',
-            'image', 'links', 'active',
+            'image', 'materials', 'active',
         ]})
     ]
     list_display = ('title', 'start_date', 'active', 'was_published_recently')
@@ -17,4 +17,4 @@ class CompetitionAdmin(admin.ModelAdmin):
     readonly_fields = ('pub_date', 'upd_date',)
 
 admin.site.register(Competition, CompetitionAdmin)
-admin.site.register(Link)
+admin.site.register(Material)
