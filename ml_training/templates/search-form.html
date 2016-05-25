@@ -1,21 +1,26 @@
 {% load i18n %}
 <form class="input-group search-form" method="get" action="{% url 'competition:search' %}?{{ FILTER_KEY }}={{ filter }}">
+    <div class="input-group-btn">
+        <a class="btn btn-sm btn-{% if filter == 'active'%}primary{% else %}default{% endif %}" data-{{ FILTER_KEY }}="active">{% trans "Active" %}</a>
+        <a class="btn btn-sm btn-{% if filter == 'finished'%}primary{% else %}default{% endif %}" data-{{ FILTER_KEY }}="finished">{% trans "Finished" %}</a>
+        <a class="btn btn-sm btn-{% if filter == 'all'%}primary{% else %}default{% endif %}" data-{{ FILTER_KEY }}="all">{% trans "All" %}</a>
+    </div>
     <input
         type="text"
         name="q"
-        class="form-control search-input"
+        class="form-control input-sm search-input"
         placeholder="{% trans "Search" %}"
         autocomplete="off"
     >
     <div class="input-group-btn">
         <div class="btn-group hidden">
-            <button type="button" class="btn btn-default dropdown-toggle search-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i></button>
+            <button type="button" class="btn btn-sm btn-default dropdown-toggle search-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i></button>
             <ul class="dropdown-menu dropdown-menu-right">
                 <li><a href="#" class="for-actual" data-type="checkbox"><input type="checkbox" name="actual" class="hidden" />{% trans "Choose active" %}</a></li>
             </ul>
         </div>
 
-        <button type="submit" class="btn btn-default">
+        <button type="submit" class="btn btn-sm btn-default">
             <i class="glyphicon glyphicon-search"></i>
         </button>
     </div>

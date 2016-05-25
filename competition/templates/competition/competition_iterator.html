@@ -1,10 +1,6 @@
 {% load i18n %}
-<div class="competition-filter">
-    <div class="btn-group">
-        <a class="btn btn-sm btn-{% if filter == 'active'%}primary{% else %}default{% endif %}" data-{{ FILTER_KEY }}="active">{% trans "Active" %}</a>
-        <a class="btn btn-sm btn-{% if filter == 'finished'%}primary{% else %}default{% endif %}" data-{{ FILTER_KEY }}="finished">{% trans "Finished" %}</a>
-        <a class="btn btn-sm btn-{% if filter == 'all'%}primary{% else %}default{% endif %}" data-{{ FILTER_KEY }}="all">{% trans "All" %}</a>
-    </div>
+<div class="competition-filter row">
+    <div class="col-md-7">{% include "search-form.html" %}</div>
 </div>
 <div class="competition-list">
 {% for competition in competitions %}
