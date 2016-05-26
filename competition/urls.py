@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^atom/$', AtomCompetitionsFeed(), name='atom'),
     url(r'^(?P<pk>\d+)/$', views.detail_redirect, name='detail'),
     url(r'^search/$', views.SearchCompetitionListView.as_view(), name='search'),
+    url(r'^new/$', views.CreateCompetitionView.as_view(), name='create')
 ]

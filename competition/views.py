@@ -1,5 +1,8 @@
 from itertools import chain
 
+from django.core.urlresolvers import reverse_lazy
+
+from competition.forms import CreateCompetitionForm
 from django.conf import settings
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
@@ -136,3 +139,10 @@ class SearchCompetitionListView(SearchMixin, CompetitionListView):
 def detail_redirect(request, pk):
     competition = get_object_or_404(Competition, pk=pk)
     return HttpResponseRedirect(competition.link)
+
+
+class CreateCompetitionView(NeverCacheMixin, generic.CreateView):
+    model = Competition
+    form_class = CreateCompetitionForm
+    template_name_suffix = '_create_form'
+    success_url = reverse_lazy('competition:index')
