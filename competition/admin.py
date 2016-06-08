@@ -17,8 +17,8 @@ class CompetitionAdmin(admin.ModelAdmin):
         ]})
     ]
     inlines = [MaterialInline]
-    list_display = ('title', 'start_date', 'active', 'was_published_recently')
-    list_filter = ['pub_date', 'upd_date', 'active']
+    list_display = ('title', 'start_date', 'finish_date', 'active', 'was_published_recently')
+    list_filter = ['pub_date', 'upd_date', 'active', 'start_date', 'finish_date']
     search_fields = ['title', 'content']
     readonly_fields = ('pub_date', 'upd_date',)
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-25 13:53+0300\n"
+"POT-Creation-Date: 2016-06-08 20:07+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,109 +20,113 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: competition/admin.py:8
+#: competition/admin.py:13
 msgid "Create new competition"
 msgstr "Создать новое соревнование"
 
-#: competition/models.py:17
+#: competition/models.py:15
 msgid "link"
 msgstr "ссылка"
 
-#: competition/models.py:18 competition/models.py:93
+#: competition/models.py:16 competition/models.py:82
 msgid "links"
 msgstr "ссылки"
 
-#: competition/models.py:35 competition/models.py:52 competition/models.py:82
+#: competition/models.py:33 competition/models.py:61 competition/models.py:105
 msgid "title"
 msgstr "заголовок"
 
-#: competition/models.py:36
+#: competition/models.py:34
 msgid "href"
 msgstr "урл"
 
-#: competition/models.py:37
+#: competition/models.py:35
 msgid "target"
 msgstr "как открыть?"
 
-#: competition/models.py:43
-msgid "material"
-msgstr "материал"
-
-#: competition/models.py:44 competition/models.py:95
-msgid "materials"
-msgstr "материалы"
-
-#: competition/models.py:53
-msgid "article link"
-msgstr "ссылка на статью"
-
-#: competition/models.py:54
-msgid "video link"
-msgstr "ссылка на видео"
-
-#: competition/models.py:55
-msgid "slides link"
-msgstr "ссылка на слайды"
-
-#: competition/models.py:61
+#: competition/models.py:40
 msgid "competition"
 msgstr "соревнование"
 
-#: competition/models.py:62
+#: competition/models.py:41
 msgid "competitions"
 msgstr "соревнования"
 
-#: competition/models.py:83
+#: competition/models.py:62
 msgid "description"
 msgstr "описание"
 
-#: competition/models.py:84
+#: competition/models.py:63
 msgid "published date"
 msgstr "даты публикации"
 
-#: competition/models.py:85
+#: competition/models.py:64
 msgid "updated date"
 msgstr "дата изменения"
 
-#: competition/models.py:86
+#: competition/models.py:66
 #: competition/templates/competition/competition_detail.html:15
 msgid "start date"
 msgstr "начало"
 
-#: competition/models.py:87
+#: competition/models.py:71
 #: competition/templates/competition/competition_detail.html:17
 msgid "submission deadline"
 msgstr "крайний срок регистрации"
 
-#: competition/models.py:88
+#: competition/models.py:74
 #: competition/templates/competition/competition_detail.html:16
 msgid "entry deadline"
 msgstr "крайний срок подачи"
 
-#: competition/models.py:89
+#: competition/models.py:76
 #: competition/templates/competition/competition_detail.html:18
 msgid "finish date"
 msgstr "окончание"
 
-#: competition/models.py:90
+#: competition/models.py:79
 msgid "active?"
 msgstr "активно?"
 
-#: competition/models.py:91
+#: competition/models.py:80
 msgid "url for logo"
 msgstr "ссылка на лого"
 
-#: competition/models.py:92
+#: competition/models.py:81
 msgid "site link"
 msgstr "ссылка сайта"
 
-#: competition/models.py:94
+#: competition/models.py:83
 msgid "author"
 msgstr "автор"
 
-#: competition/models.py:102
+#: competition/models.py:91
 msgid "was published recently?"
 msgstr "опубликовано недавно?"
+
+#: competition/models.py:96
+msgid "analysis"
+msgstr "разбор"
+
+#: competition/models.py:97
+msgid "analyses"
+msgstr "разборы"
+
+#: competition/models.py:106
+msgid "article link"
+msgstr "ссылка на статью"
+
+#: competition/models.py:107
+msgid "video link"
+msgstr "ссылка на видео"
+
+#: competition/models.py:108
+msgid "slides link"
+msgstr "ссылка на слайды"
+
+#: competition/models.py:109
+msgid "code link"
+msgstr "ссылка на код"
 
 #: competition/templates/competition/competition_detail.html:14
 msgid "Competition site"
@@ -135,31 +139,23 @@ msgid "remaining"
 msgstr "осталось"
 
 #: competition/templates/competition/competition_detail.html:23
-#: competition/templates/competition/competition_iterator.html:32
 msgid "Materials"
 msgstr "Материалы"
 
-#: competition/templates/competition/competition_iterator.html:4
-msgid "Active"
-msgstr "Активны"
-
-#: competition/templates/competition/competition_iterator.html:5
-msgid "Finished"
-msgstr "Завершены"
-
-#: competition/templates/competition/competition_iterator.html:6
-msgid "All"
-msgstr "Все"
-
-#: competition/templates/competition/competition_iterator.html:23
+#: competition/templates/competition/competition_iterator.html:19
 msgid "finished"
 msgstr "завершено"
 
-#: competition/templates/competition/competition_iterator.html:26
+#: competition/templates/competition/competition_iterator.html:22
 msgid "Remaining"
 msgstr "Осталось"
 
-#: competition/templates/competition/competition_iterator.html:65
+#: competition/templates/competition/competition_iterator.html:28
+#| msgid "analyses"
+msgid "Analyses"
+msgstr "Разборы"
+
+#: competition/templates/competition/competition_iterator.html:66
 #: competition/templates/competition/competition_iterator_simple.html:20
 msgid "Oops, no competitions found"
 msgstr "Ничего не найдено"
@@ -169,7 +165,7 @@ msgstr "Ничего не найдено"
 msgid "Search results for <em>%(query)s</em>"
 msgstr "Результаты по запросу <em>%(query)s</em>"
 
-#: competition/views.py:132 ml_training/templates/search-form.html.py:7
+#: competition/views.py:132 ml_training/templates/search-form.html.py:12
 msgid "Search"
 msgstr "Поиск"
 
@@ -190,27 +186,35 @@ msgstr "Английский"
 msgid "Russian"
 msgstr "Русский"
 
-#: ml_training/templates/base.html:35
+#: ml_training/templates/base.html:31
 msgid "Facebook"
 msgstr "Facebook"
 
-#: ml_training/templates/base.html:36
+#: ml_training/templates/base.html:32
 msgid "YouTube"
 msgstr "YouTube"
 
-#: ml_training/templates/base.html:37
-msgid "New competition"
-msgstr "Новое соревнование"
-
-#: ml_training/templates/base.html:37
+#: ml_training/templates/base.html:33
 msgid "Notify about the competition"
 msgstr "Сообщить о соревновании"
 
-#: ml_training/templates/search-form.html:14
+#: ml_training/templates/search-form.html:4
+msgid "Active"
+msgstr "Активны"
+
+#: ml_training/templates/search-form.html:5
+msgid "Finished"
+msgstr "Завершены"
+
+#: ml_training/templates/search-form.html:6
+msgid "All"
+msgstr "Все"
+
+#: ml_training/templates/search-form.html:19
 msgid "Choose active"
 msgstr "Выбрать активные"
 
-#: ml_training/templates/search-form.html:25
+#: ml_training/templates/search-form.html:30
 msgid "Results"
 msgstr "Результаты"
 
@@ -225,6 +229,15 @@ msgstr "Не найдено"
 #: ml_training/views.py:23
 msgid "Server Error"
 msgstr "Сервенная ошибка"
+
+#~ msgid "material"
+#~ msgstr "материал"
+
+#~ msgid "materials"
+#~ msgstr "материалы"
+
+#~ msgid "New competition"
+#~ msgstr "Новое соревнование"
 
 #~ msgid "Details"
 #~ msgstr "Подробнее"

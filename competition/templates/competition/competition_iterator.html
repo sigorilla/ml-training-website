@@ -25,7 +25,7 @@
                 <div class="competition-description">{{ competition.content|safe }}</div>
                 {% if competition.material_set.count %}
                     <div class="competition-materials">
-                        <h5>{% trans "Materials" %}:</h5>
+                        <h5>{% trans "Analyses" %}:</h5>
                         <ul>
                         {% for material in competition.material_set.all %}
                             <li>
@@ -34,16 +34,21 @@
                                 {% else %}
                                     <span>{{ material.title }}</span>
                                 {% endif %}
-                                {% if material.video or material.slides %}
+                                {% if material.video or material.slides or material.code %}
                                     <div class="btn-group">
                                     {% if material.video %}
                                         <a class="btn btn-default btn-xs" href="{{ material.video }}" target="_blank">
-                                            <i class="glyphicon glyphicon-facetime-video"></i>
+                                            <i class="fa fa-video-camera"></i>
                                         </a>
                                     {% endif %}
                                     {% if material.slides %}
                                         <a class="btn btn-default btn-xs" href="{{ material.slides }}" target="_blank">
-                                            <i class="glyphicon glyphicon-picture"></i>
+                                            <i class="fa fa-picture-o"></i>
+                                        </a>
+                                    {% endif %}
+                                    {% if material.code %}
+                                        <a class="btn btn-default btn-xs" href="{{ material.code }}" target="_blank">
+                                            <i class="fa fa-github"></i>
                                         </a>
                                     {% endif %}
                                     </div>
