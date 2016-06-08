@@ -30,22 +30,11 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-# AWS S3
-
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-AWS_ACCESS_KEY_ID = config.get('AWS_ACCESS_KEY_ID', '')
-AWS_SECRET_ACCESS_KEY = config.get('AWS_SECRET_ACCESS_KEY', '')
-AWS_STORAGE_BUCKET_NAME = config.get('AWS_STORAGE_BUCKET_NAME', '')
-
-# Hosts
-
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'ml-training.herokuapp.com',
     'ml-training.herokuapp.com.',
-    'ml-training-stage.herokuapp.com.',
-    'ml-training-stage.herokuapp.com.',
     'mltrainings.ru',
     'mltrainings.ru.',
 ]
@@ -62,7 +51,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'storages',
     'competition',
 )
 

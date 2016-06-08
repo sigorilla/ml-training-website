@@ -98,5 +98,5 @@ class Material(models.Model):
     title = models.CharField(max_length=200, verbose_name=_('title'))
     article = models.URLField(verbose_name=_('article link'), blank=True)
     video = models.URLField(verbose_name=_('video link'), blank=True)
-    slides = models.FileField(verbose_name=_('slides'), blank=True, upload_to='slides')
+    slides = models.URLField(verbose_name=_('slides link'), blank=True)
     competition = models.ForeignKey(Competition, on_delete=models.CASCADE)
