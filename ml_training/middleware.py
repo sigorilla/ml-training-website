@@ -1,6 +1,5 @@
 __autor__ = 'Greg Brown - greg@gregbrown.co.nz'
 
-from functools import reduce
 from django import http
 from django.utils.http import urlquote
 from django.core import urlresolvers
@@ -9,15 +8,8 @@ from django.conf import settings
 
 class SaveFilterQueryMiddleware(object):
 
-    @staticmethod
-    def get_excluded_paths():
-        return ['/admin/', '/new/']
-
     def process_request(self, request):
-        if settings.FILTER_KEY not in request.GET and \
-                not reduce(lambda result, path: result or request.path_info.startswith(path),
-                           self.get_excluded_paths(),
-                           True):
+        if settings.FILTER_KEY not in request.GET and request.path_info.find('/admin/') == -1:
             new_path = '%s?%s%s%s=%s' % (request.path_info, request.META['QUERY_STRING'],
                                          '&' if request.META['QUERY_STRING'] else '',
                                          settings.FILTER_KEY, 'active')

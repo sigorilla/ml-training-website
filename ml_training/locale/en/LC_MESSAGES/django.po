@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-27 00:38+0300\n"
+"POT-Creation-Date: 2016-05-26 11:59+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,16 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: competition/admin.py:13
-#: competition/templates/competition/competition_create_form.html:6
 msgid "Create new competition"
-msgstr ""
-
-#: competition/forms.py:28 competition/forms.py:30
-msgid "Date must be in the future."
-msgstr ""
-
-#: competition/forms.py:32
-msgid "Finish date must be greater than start date."
 msgstr ""
 
 #: competition/models.py:17
@@ -130,14 +121,6 @@ msgstr ""
 msgid "slides"
 msgstr ""
 
-#: competition/templates/competition/competition_create_form.html:24
-msgid "Save"
-msgstr ""
-
-#: competition/templates/competition/competition_create_form.html:25
-msgid "Reset"
-msgstr ""
-
 #: competition/templates/competition/competition_detail.html:14
 msgid "Competition site"
 msgstr ""
@@ -171,7 +154,7 @@ msgstr ""
 msgid "Search results for <em>%(query)s</em>"
 msgstr ""
 
-#: competition/views.py:135 ml_training/templates/search-form.html.py:12
+#: competition/views.py:132 ml_training/templates/search-form.html.py:12
 msgid "Search"
 msgstr ""
 

@@ -70,8 +70,8 @@ class Competition(models.Model):
     entry_deadline = models.DateTimeField(default=timezone.now, verbose_name=_('entry deadline'))
     finish_date = models.DateTimeField(verbose_name=_('finish date'), default=timezone.now, blank=False)
     active = models.BooleanField(default=True, verbose_name=_('active?'))
-    image = models.URLField(verbose_name=_('url for logo'))
-    link = models.URLField(verbose_name=_('site link'), blank=False)
+    image = models.URLField(verbose_name=_('url for logo'), default=DEFAULT_IMAGE)
+    link = models.URLField(verbose_name=_('site link'), default='#', blank=False)
     links = models.ManyToManyField(Link, verbose_name=_('links'), blank=True)
     author = models.ForeignKey(User, verbose_name=_('author'), default=1)
 
